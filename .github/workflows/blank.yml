@@ -14,7 +14,7 @@ jobs:
       - name: Baixar arquivos
         uses: actions/checkout@v4
 
-      - name: Extrair projeto V28
+      - name: Extrair projeto V29
         run: |
           unzip -o Kazin_Tecnico_2026_V28_Nuvem.zip
           ls -la
