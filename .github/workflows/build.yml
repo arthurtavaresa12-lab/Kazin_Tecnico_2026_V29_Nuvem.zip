@@ -1,55 +1,27 @@
-name: Gerar APK + AAB Android V29
-
+name: Gerar APK Android
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Baixar projeto
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configurar Java
-        uses: actions/setup-java@v4
+      - name: Montar app
+        uses: giuliandb/web-to-apk-action@v2
         with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Configurar Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Instalar Android 16
-        run: |
-          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
-
-      - name: Preparar projeto Android V29
-        run: |
-          unzip -o Kazin_Tecnico_2026_V29_APP.zip -d android_project
-          find android_project -name gradlew -type f -exec chmod +x {} \;
-
-      - name: Configurar Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10'
-
-      - name: Gerar APK + AAB
-        working-directory: android_project
-        run: |
-          gradle assembleDebug bundleRelease --no-daemon
+          url: ./index.html
+          app_name: Kazin_Tecnico_2026
+          package_name: br.com.kazintecnico.jogo
+          version_code: 29
+          version_name: "2026.V29"
 
       - name: Salvar APK
         uses: actions/upload-artifact@v4
         with:
-          name: Kazin-Tecnico-V29-APK
-          path: android_project/**/build/outputs/apk/debug/*.apk
-
-      - name: Salvar AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: Kazin-Tecnico-V29-AAB
-          path: android_project/**/build/outputs/bundle/release/*.aab
+          name: Aplicativo_Jogo
+          path: app-release.apk
+          
