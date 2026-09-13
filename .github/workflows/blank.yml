@@ -16,7 +16,7 @@ jobs:
 
       - name: Extrair projeto V29
         run: |
-          unzip -o Kazin_Tecnico_2026_V28_Nuvem.zip
+          unzip -o Kazin_Tecnico_2026_V29_Nuvem.zip
           ls -la
           ls -la app
 
