@@ -1,0 +1,27 @@
+name: Gerar APK Android
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Montar app
+        uses: giuliandb/web-to-apk-action@v2
+        with:
+          url: ./index.html
+          app_name: Kazin_Tecnico_2026
+          package_name: br.com.kazintecnico.jogo
+          version_code: 29
+          version_name: "2026.V29"
+
+      - name: Salvar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aplicativo_Jogo
+          path: app-release.apk
+          
