@@ -1,4 +1,4 @@
-name: Gerar APK Android
+name: Gerar APK
 on:
   push:
     branches: [ main ]
@@ -10,18 +10,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Montar app
+      - name: Criar APK
         uses: giuliandb/web-to-apk-action@v2
         with:
-          url: ./index.html
+          root_dir: ./
+          entry_file: index.html
           app_name: Kazin_Tecnico_2026
-          package_name: br.com.kazintecnico.jogo
+          package_name: br.com.kazin.jogo
           version_code: 29
           version_name: "2026.V29"
 
       - name: Salvar APK
         uses: actions/upload-artifact@v4
         with:
-          name: Aplicativo_Jogo
+          name: APK_DO_JOGO
           path: app-release.apk
+          
+          
+          
           
